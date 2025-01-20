@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart'; // Import the Google Mobile Ads package
-import 'audio_player.dart'; // Import the audio player screen
+import 'package:google_mobile_ads/google_mobile_ads.dart'; 
+import 'audio_player.dart';
 import 'radio_screen.dart';
 import 'search_screen.dart';
 
@@ -10,7 +10,7 @@ class MusicPlayerScreen extends StatefulWidget {
   final String albumArt;
   final String genres;
   final String dateTime;
-  final String mediaSource; // Path to the audio file
+  final String mediaSource;
 
   const MusicPlayerScreen({
     super.key,
@@ -19,7 +19,7 @@ class MusicPlayerScreen extends StatefulWidget {
     required this.albumArt,
     required this.genres,
     required this.dateTime,
-    required this.mediaSource, // Path to the audio file
+    required this.mediaSource,
   });
 
   @override
@@ -33,25 +33,24 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    _loadBannerAd(); // Load the banner ad when the screen is initialized
+    _loadBannerAd();
   }
 
   @override
   void dispose() {
-    _bannerAd?.dispose(); // Dispose the banner ad when the screen is disposed
+    _bannerAd?.dispose(); 
     super.dispose();
   }
 
-  // Load the banner ad
   void _loadBannerAd() {
     _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-3940256099942544/5224354917', // Replace with your actual ad unit ID
+      adUnitId: 'ca-app-pub-3940256099942544/5224354917',
       size: AdSize.banner,
       request: AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (ad) {
           setState(() {
-            _isBannerAdReady = true; // Set the ad as ready
+            _isBannerAdReady = true;
           });
         },
       ),
@@ -67,7 +66,6 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
       ),
       body: Column(
         children: [
-          // Now Playing Section
           Container(
             padding: const EdgeInsets.all(20),
             child: Row(
@@ -105,20 +103,17 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
           ),
           const SizedBox(height: 20),
 
-          // Playback controls with play button linked to AudioPlayerScreen
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
                 onPressed: () {
-                  // You can add functionality for skipping to previous track
                 },
                 icon: const Icon(Icons.skip_previous),
                 iconSize: 40,
               ),
               IconButton(
                 onPressed: () {
-                  // Navigate to the AudioPlayerScreen (audio player)
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -138,7 +133,6 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               ),
               IconButton(
                 onPressed: () {
-                  // You can add functionality for skipping to next track
                 },
                 icon: const Icon(Icons.skip_next),
                 iconSize: 40,
@@ -147,7 +141,6 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
           ),
           const SizedBox(height: 20),
 
-          // Check if banner ad is ready and display it
           if (_isBannerAdReady)
             Container(
               alignment: Alignment.center,
@@ -166,7 +159,6 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
         ],
         onTap: (index) {
           if (index == 0) {
-            // Handle Library Navigation
           } else if (index == 1) {
             Navigator.push(
               context,

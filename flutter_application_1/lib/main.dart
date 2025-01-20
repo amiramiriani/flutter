@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'music_player_screen.dart';
-import 'music_list.dart'; // Import the music list file
-import 'radio_screen.dart'; // Import the RadioScreen file
+import 'music_list.dart';
+import 'radio_screen.dart'; 
 import 'search_screen.dart';
 
 void main() {
@@ -28,11 +28,10 @@ class MusicApp extends StatelessWidget {
 
 int _selectedIndex = 0;
 
-// Get unique genres from the music list
 List<String> _getUniqueGenres() {
   final genres = <String>{};
   for (var song in musicList) {
-    genres.add(song['genres']!); // Assuming 'genres' is a single genre string for now
+    genres.add(song['genres']!);
   }
   return genres.toList();
 }
@@ -56,7 +55,7 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        return false; // Disable back navigation
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(
@@ -68,7 +67,7 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
               height: 36,
             ),
           ),
-          automaticallyImplyLeading: false, // Hide back icon
+          automaticallyImplyLeading: false,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,9 +85,9 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Divider(),
-                  _buildGenreSelection(), // Genre boxes
+                  _buildGenreSelection(),
                   const Divider(),
-                  _buildArtistSelection(), // Artist boxes
+                  _buildArtistSelection(),
                   const Divider(),
                 ],
               ),
@@ -96,7 +95,7 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
             const SizedBox(height: 10),
             Expanded(
               child: selectedGenre == null && selectedArtist == null
-                  ? _buildAllMusic(screenWidthInInches, crossAxisCount) // Show all music by default
+                  ? _buildAllMusic(screenWidthInInches, crossAxisCount) 
                   : _buildSongsForSelectedGenreAndArtist(screenWidthInInches, crossAxisCount),
             ),
           ],
@@ -109,10 +108,10 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           ],
           onTap: (index) {
-            _selectedIndex = index; // Track the selected index
+            _selectedIndex = index;
 
             if (index == 0) {
-              // Handle library tap
+
             } else if (index == 1) {
               Navigator.push(
                 context,
@@ -134,17 +133,16 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
     );
   }
 
-  // Function to calculate the screen width in inches
+
   double calculateScreenWidthInInches(BuildContext context) {
-    final size = MediaQuery.of(context).size; // Get screen size
-    final pixelRatio = MediaQuery.of(context).devicePixelRatio; // Get pixel ratio
-    final widthInPixels = size.width; // Screen width in pixels
-    final dpi = pixelRatio * 160; // Convert to DPI
-    final widthInInches = widthInPixels / dpi; // Convert pixels to inches
+    final size = MediaQuery.of(context).size;
+    final pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final widthInPixels = size.width;
+    final dpi = pixelRatio * 160;
+    final widthInInches = widthInPixels / dpi;
     return widthInInches;
   }
 
-  // Display genre selection boxes with "All" option
   Widget _buildGenreSelection() {
     final genres = _getUniqueGenres();
     return Wrap(
@@ -154,7 +152,7 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
         GestureDetector(
           onTap: () {
             setState(() {
-              selectedGenre = null; // Set selected genre to null for "All"
+              selectedGenre = null;
             });
           },
           child: Container(
@@ -178,7 +176,7 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
           return GestureDetector(
             onTap: () {
               setState(() {
-                selectedGenre = genre; // Set selected genre
+                selectedGenre = genre;
               });
             },
             child: Container(
@@ -203,7 +201,6 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
     );
   }
 
-  // Display artist selection boxes with "All" option
   Widget _buildArtistSelection() {
     final artists = _getUniqueArtists();
     return Wrap(
@@ -213,7 +210,7 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
         GestureDetector(
           onTap: () {
             setState(() {
-              selectedArtist = null; // Set selected artist to null for "All"
+              selectedArtist = null;
             });
           },
           child: Container(
@@ -237,7 +234,7 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
           return GestureDetector(
             onTap: () {
               setState(() {
-                selectedArtist = artist; // Set selected artist
+                selectedArtist = artist;
               });
             },
             child: Container(
@@ -262,7 +259,6 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
     );
   }
 
-  // Display all music when no genre or artist is selected
   Widget _buildAllMusic(double screenWidthInInches, int crossAxisCount) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -326,7 +322,6 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
     );
   }
 
-  // Filter and display music for selected genre and artist
   Widget _buildSongsForSelectedGenreAndArtist(double screenWidthInInches, int crossAxisCount) {
     final filteredSongs = musicList.where((song) {
       final genreMatch = selectedGenre == null || song['genres'] == selectedGenre;
@@ -396,7 +391,6 @@ class _MusicSelectorScreenState extends State<MusicSelectorScreen> {
     );
   }
 
-  // Function to get unique artists
   List<String> _getUniqueArtists() {
     final artists = <String>{};
     for (var song in musicList) {

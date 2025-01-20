@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'music_list.dart'; // Import your music list here
-import 'music_player_screen.dart'; // Import the MusicPlayerScreen
+import 'music_list.dart';
+import 'music_player_screen.dart';
 import 'main.dart';
 import 'radio_screen.dart';
 
@@ -14,7 +14,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController _searchController = TextEditingController();
   List<Map<String, dynamic>> _filteredMusicList = musicList;
-  int _currentIndex = 2; // Start on the 'Search' page
+  int _currentIndex = 2;
 
   @override
   void initState() {
@@ -40,18 +40,18 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Future<bool> _onWillPop() async {
-    return false; // Prevents the back navigation
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _onWillPop, // Prevent back navigation
+      onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Search Music'),
           centerTitle: true,
-          automaticallyImplyLeading: false, // This removes the back button
+          automaticallyImplyLeading: false,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -139,10 +139,10 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
        bottomNavigationBar: BottomNavigationBar(
-  currentIndex: _currentIndex, // Set the current index to highlight the correct item
+  currentIndex: _currentIndex,
   type: BottomNavigationBarType.fixed,
-  selectedItemColor: Theme.of(context).colorScheme.primary, // Use the primary color from the theme
-  unselectedItemColor: Colors.grey, // Use grey for unselected icons
+  selectedItemColor: Theme.of(context).colorScheme.primary, 
+  unselectedItemColor: Colors.grey, 
   items: const [
     BottomNavigationBarItem(icon: Icon(Icons.library_music), label: 'Library'),
     BottomNavigationBarItem(icon: Icon(Icons.radio), label: 'Radio'),
@@ -150,7 +150,7 @@ class _SearchScreenState extends State<SearchScreen> {
   ],
   onTap: (index) {
     setState(() {
-      _currentIndex = index; // Update the selected index when the user taps on the item
+      _currentIndex = index;
     });
 
     if (index == 0) {
@@ -168,7 +168,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       );
     } else if (index == 2) {
-      // Handle search logic if required
+
     }
   },
 ),

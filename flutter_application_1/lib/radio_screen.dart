@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart'; // For opening URLs
+import 'package:url_launcher/url_launcher.dart';
 import 'main.dart';
 import 'search_screen.dart';
 
@@ -11,45 +11,44 @@ class RadioPage extends StatefulWidget {
 }
 
 class _RadioPageState extends State<RadioPage> {
-  int _currentIndex = 1; // Start with the 'Radio' page
+  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
-    // List of radio stations with title, URL, and logo
     final List<Map<String, String>> radioStations = [
       {
         'title': 'Radio Javan',
         'url': 'https://player.iranseda.ir/live-player/?VALID=TRUE&CH=13&t=b&auto=true&SAVE=TRUE',
-        'image': 'assets/radio images/radio-javan.png', // Example URL, use actual image URL
+        'image': 'assets/radio images/radio-javan.png',
       },
       {
         'title': 'Radio Avaa',
         'url': 'https://player.iranseda.ir/live-player/?VALID=TRUE&CH=21&t=b&auto=true&SAVE=TRUE',
-        'image': 'assets/radio images/radio-avaa.png', // Example URL, use actual image URL
+        'image': 'assets/radio images/radio-avaa.png',
       },
       {
         'title': 'Radio Salamat',
         'url': 'https://player.iranseda.ir/live-player/?VALID=TRUE&CH=17&t=b&auto=true&SAVE=TRUE',
-        'image': 'assets/radio images/radio-salamat.png', // Example URL, use actual image URL
+        'image': 'assets/radio images/radio-salamat.png',
       },
     ];
 
     return WillPopScope(
       onWillPop: () async {
-        return false; // Prevent back navigation
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Radio Stations'),
           centerTitle: true,
-          automaticallyImplyLeading: false, // Disable back button in AppBar
+          automaticallyImplyLeading: false,
         ),
         body: ListView.builder(
           itemCount: radioStations.length,
           itemBuilder: (context, index) {
             final station = radioStations[index];
             return ListTile(
-              leading: Image.asset(station['image']!, width: 50, height: 50), // Use local images
+              leading: Image.asset(station['image']!, width: 50, height: 50),
               title: Text(station['title']!),
               subtitle: Text(station['url']!),
               onTap: () {
@@ -59,7 +58,7 @@ class _RadioPageState extends State<RadioPage> {
           },
         ),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex, // Make sure to set the current index
+          currentIndex: _currentIndex,
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.library_music), label: 'Library'),
@@ -92,7 +91,6 @@ class _RadioPageState extends State<RadioPage> {
     );
   }
 
-  // Function to open the URL using the url_launcher package
   Future<void> _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
